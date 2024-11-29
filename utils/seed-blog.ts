@@ -5,13 +5,23 @@ import hashPassword from "./hashPassword"
 
 export default async function seed() {
 
+    const response = await fetch('https://api.vercel.app/blog');
+    const blogs = await response.json();
+
     const password = await hashPassword('password')
 
     const user = await prisma.user.create({
         data: {
             email: 'warodom@prisma.io',
-            name: 'wwarodom',
-            password,
+            name: 'admin',
+            password: 'admin',
+            role: 'admin',
+            posts:{
+                create: blogs.map((post:any) => ({
+                    subject: post.title || 'Untitled', // Provide fallback for missing fields
+                    detail: post.content || 'No content available',
+                  })),
+            }
         }
     })
 
