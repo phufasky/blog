@@ -14,12 +14,13 @@ export default async function BlogUI() {
             user: true,
         },
     });
-    console.log(JSON.stringify(posts))
+    
 
     const user = await getSession()
-
+    console.log(user ? user.role : "No user logged in");
     return <>
         <Nav />
+        
 
         <h1 className="text-2xl font-bold mt-16 mb-4">Blog UI</h1>
         <div className="flex flex-wrap gap-4 mt-4">
@@ -32,7 +33,7 @@ export default async function BlogUI() {
                                     {post.subject}
                                 </div>
                                 <div>
-                                    {user ?
+                                    {user && user.role ==='admin'?
                                         <>
                                             <Link href={{
                                                 pathname: '/blog/edit',
