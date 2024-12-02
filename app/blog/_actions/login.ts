@@ -23,7 +23,7 @@ type fieldErrors = {
 export default async function login(prevState: unknown, formData: FormData):
     Promise<{
         message?: string
-        data?: string
+        data?: { role: string};
         error?: fieldErrors
     }> {
 
@@ -31,6 +31,7 @@ export default async function login(prevState: unknown, formData: FormData):
         formData.get("name"))
 
     const result = addSchema.safeParse(Object.fromEntries(formData.entries()))
+    
     if (result.success === false) {
         console.log("Error: ", result.error.formErrors.fieldErrors)
         return { error: result.error.formErrors.fieldErrors }
@@ -47,18 +48,16 @@ export default async function login(prevState: unknown, formData: FormData):
         console.log("Remember: ", remember)
 
         if (user) {
-            console.log("User found:", user);
             if (await isValidPassword(password, user.password)) {
-                console.log("Right pass")
-                return await loginUser(user, remember);
-            }
-            else {
-                console.log("Wrong pass")
-                return { error: { message: "Incorrect user or password" } }
+                await loginUser(user, remember);
+
+                // Return the user's role for frontend redirection
+                return { message: "Login successful", data: { role: user.role } };
+            } else {
+                return { error: { message: "Incorrect email or password" } };
             }
         } else {
-            console.log("No user found with that email.");
-            return { error: { message: "Cannot find a user" } }
+            return { error: { message: "User not found" } };
         }
 
     } catch (error) {

@@ -61,6 +61,6 @@ export default async function BlogUI() {
                 )
             }
         </div>
-        <Link href="/"><Button>Home</Button></Link>
+        
     </ >
 }

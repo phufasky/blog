@@ -48,7 +48,7 @@ export default function Register() {
                 </div>
             </form>
             <br /><hr /> <br />
-            <Link href="/blog-ui"><Button>Back</Button></Link>
+            <Link href="/"><Button>Back</Button></Link>
         </div>
     )
 }

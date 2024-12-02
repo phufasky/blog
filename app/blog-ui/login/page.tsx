@@ -14,8 +14,11 @@ import Nav from "../_component/Nav"
 export default function Login() {
     const [data, action] = useFormState(login, {})
 
-    if (data.message)
-        redirect("/blog-ui")
+    if (data?.data?.role === "admin") {
+        redirect("/blog"); // Redirect admin to /blog
+    } else if (data?.data?.role === "user") {
+        redirect("/blog-ui"); // Redirect user to /blog-ui
+    }
     
     return (
         <>
@@ -47,7 +50,7 @@ export default function Login() {
                 </div>
             </form>
             <br /><hr /> <br />
-            <Link href="/blog-ui"><Button>Back</Button></Link>
+            <Link href="/"><Button>Back</Button></Link>
         </>
     )
 }

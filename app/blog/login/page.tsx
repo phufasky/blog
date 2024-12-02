@@ -9,8 +9,11 @@ import {style} from "../constants/style"
 export default function Login() {
   const [data, action] = useFormState(login, {})
 
-  if (data.message)
-    redirect("/blog")
+  if (data?.data?.role === "admin") {
+    redirect("/blog"); // Redirect admin to /blog
+} else if (data?.data?.role === "user") {
+    redirect("/blog-ui"); // Redirect user to /blog-ui
+}
 
   return (
     <div>
