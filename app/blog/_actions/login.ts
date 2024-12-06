@@ -6,7 +6,7 @@ import { loginUser } from "@/utils/loginUser";
 import { z } from "zod";
 
 const addSchema = z.object({
-    email: z.string().email().max(20),
+    email: z.string().email().max(50),
     password: z.string().min(3),
     remember: z
         .union([z.string(), z.undefined()]) // Accept string ('on') or undefined

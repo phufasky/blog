@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const addSchema = z.object({
     id: z.string(),
-    subject: z.string().min(3).max(20),
+    subject: z.string().min(3).max(100),
     detail: z.string().min(3),
 })
 
