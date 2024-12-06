@@ -12,9 +12,9 @@ export default async function seed() {
 
     const user = await prisma.user.create({
         data: {
-            email: 'warodom@prisma.io',
+            email: 'admin@prisma.io',
             name: 'admin',
-            password: 'admin',
+            password,
             role: 'admin',
             posts:{
                 create: blogs.map((post:any) => ({
@@ -25,27 +25,7 @@ export default async function seed() {
         }
     })
 
-    const posts = await prisma.user.create({
-        data: {
-            email: 'ariadne@prisma.io',
-            name: 'Ariadne',
-            password,
-            posts: {
-                create: [
-                    {
-                        subject: 'Subject',
-                        detail: 'Lorem ipsum dol epturi! Fugit numquam, veritatis cumque nobis minima at. Deserunt, vel eum!'
-                    },
-                    {
-                        subject: 'Subject 2',
-                        detail: 'Lorem ipsum dol epturi! Fugit numquam, veritatis cumque nobis minima at. Deserunt 2',
-                    },
-                ],
-            },
-        },
-    })
     console.log(user)
-    console.log(posts)
 }
 
 export async function seedPost() {

@@ -19,6 +19,7 @@ export default async function User() {
                         <th>id</th>
                         <th>email</th>
                         <th>name</th>
+                        <th>role</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@ export default async function User() {
                                 <td>{user.id}</td>
                                 <td>{user.email}</td>
                                 <td>{user.name}</td>
+                                <td>{user.role}</td>
                             </tr>
                         ))
                     }
